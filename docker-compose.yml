@@ -1,0 +1,18 @@
+version: '3'
+services:
+  kingbase-v8r6:
+    image: cloudlessa:v8r6
+    container_name: kingbase-v8r6
+    networks:
+      - default
+    environment:
+      - "KINGBASE_SYSTEM_PASSWORD=123456"
+    volumes:
+      - "自己磁盘的挂载目录:/opt/Kingbase/ES/V8"
+      - "自己磁盘的挂载目录/license.dat:/home/kingbase/license.dat"
+    ports:
+      - 54321:54321
+networks:
+  default:
+    external:
+      name: cloudlessa
