@@ -44,8 +44,8 @@ services:
     environment:
       - "KINGBASE_SYSTEM_PASSWORD=123456"
     volumes:
-      - "./V8:/opt/Kingbase/ES/V8"
-      - "./license.dat:/home/kingbase/license.dat"
+      - "自己磁盘的挂载目录:/opt/Kingbase/ES/V8"
+      - "自己磁盘的挂载目录/license.dat:/home/kingbase/license.dat"
     ports:
       - 54321:54321
 networks:
@@ -109,8 +109,15 @@ You can change this by editing sys_hba.conf or using the option -A, or
 ### linux源文件准备
 
 > `kingbase.tar.gz`该压缩文件包含了`Server`端所有的东西；我是先在`Centos7`上安装了一次，然后把`Server`目录复制出来压缩的。
-### 注意 kingbase.tar.gz必须从linux上的/opt/Kingbase/ES/V8/KESRealPro/V008R006C007B0024/Server压缩成kingbase.tar.gz 
-### 人大金仓版本不一样安装位置可能不一样,自己找下就行了。
+
+### 注意 
+```
+#或者直接从服务器上压缩
+cd /opt/Kingbase/ES/V8/KESRealPro/V008R006C007B0024/Server
+tar -czvf kingbase.tar.gz Server/
+#压缩成kingbase.tar.gz
+#人大金仓版本不一样安装位置可能不一样,自己找下就行了。
+```
 
 ### `docker-entrypoint.sh`
 
@@ -141,9 +148,9 @@ MAINTAINER cloudlessa
 RUN groupadd kingbase && useradd -g kingbase -m -d /home/kingbase -s /bin/bash kingbase
 RUN mkdir -p /opt/Kingbase/ES/V8
 ADD kingbase.tar.gz /home/kingbase
-ADD entrypoint.sh /entrypoint.sh
+ADD docker-entrypoint.sh /docker-entrypoint.sh
 
-RUN chmod +x /entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
 RUN chown -R kingbase:kingbase /opt/Kingbase/ES/V8
 RUN chown -R kingbase:kingbase /home/kingbase
 
@@ -152,7 +159,7 @@ ENV EXTEND_INIT_PARAM="--locale=en_US.UTF-8 -m oracle --enable-ci"
 EXPOSE 54321
 USER kingbase
 
-ENTRYPOINT ["sh","-c","/entrypoint.sh"]
+ENTRYPOINT ["sh","-c","/docker-entrypoint.sh"]
 ```
 
 ## 构建镜像
@@ -171,5 +178,6 @@ docker build -t kingbase:v8r6 .
 
 
 ## 参考地址
-https://hub.docker.com/r/huzhihui/kingbase
-https://github.com/chyidl/kingbase-es-v8-r6-docker
+> https://hub.docker.com/r/huzhihui/kingbase
+
+> https://github.com/chyidl/kingbase-es-v8-r6-docker
