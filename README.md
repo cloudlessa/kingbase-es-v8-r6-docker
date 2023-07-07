@@ -176,6 +176,9 @@ kingbase-es-v8-r6-docker
 docker build -t kingbase:v8r6 .
 ```
 
+## 使用dbeaver 或者 navicat连接
+> 驱动在jdbc文件夹下
+
 
 ## 参考地址
 > https://hub.docker.com/r/huzhihui/kingbase
