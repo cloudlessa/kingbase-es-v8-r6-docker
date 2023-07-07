@@ -66,7 +66,7 @@ networks:
 
 >  ```sh
 >  docker ps -a
->  docker log 容器id
+>  docker logs 容器id
 >  ```
 
 > 如果出现如下日志则启动成功
