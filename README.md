@@ -104,8 +104,10 @@ You can change this by editing sys_hba.conf or using the option -A, or
 2023-02-08 09:22:07.168 CST [27] HINT:  Future log output will appear in directory "sys_log".
 ```
 
-## 镜像构建过程
+## 直接从官网下载docker镜像
+> PS:官网已经有docker镜像了 https://www.kingbase.com.cn/xzzx/index.htm
 
+## 【可以忽略】镜像构建过程
 ### linux源文件准备
 
 > `kingbase.tar.gz`该压缩文件包含了`Server`端所有的东西；我是先在`Centos7`上安装了一次，然后把`Server`目录复制出来压缩的。
